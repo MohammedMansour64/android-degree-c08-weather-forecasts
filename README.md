@@ -21,9 +21,9 @@ After you clone the app you need to replace the api key in the strings with you 
 All contributions are welcome and gratefully accepted.
 
 # License
-[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 
 A copy of the license is also available in the [license file](LICENSE).
 
-
+# Demo
+<a href='https://play.google.com/store/apps/details?id=com.barmej.weatherforecasts&utm_source=github&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width="200" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
