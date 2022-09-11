@@ -26,6 +26,7 @@ import com.barmej.weatherforecasts.ui.adapters.HoursForecastAdapter;
 import com.barmej.weatherforecasts.ui.fragments.PrimaryWeatherInfoFragment;
 import com.barmej.weatherforecasts.ui.fragments.SecondaryWeatherInfoFragment;
 import com.barmej.weatherforecasts.utils.CustomDateUtils;
+import com.barmej.weatherforecasts.utils.NotificationUtils;
 import com.barmej.weatherforecasts.utils.SharedPreferencesHelper;
 import com.barmej.weatherforecasts.viewmodel.MainViewModel;
 import com.google.android.material.tabs.TabLayout;
@@ -66,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        NotificationUtils.createWeatherStatusNotificationChannel(this);
 
         // Get an instance of FragmentManager and assign it to mFragmentManager variable
         mFragmentManager = getSupportFragmentManager();

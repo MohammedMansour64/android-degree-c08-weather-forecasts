@@ -11,6 +11,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.barmej.weatherforecasts.R;
 import com.barmej.weatherforecasts.data.WeatherDataRepository;
+import com.barmej.weatherforecasts.data.sync.SyncUtils;
 
 
 /**
@@ -65,6 +66,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         WeatherDataRepository repository = WeatherDataRepository.getInstance(getContext());
         repository.getWeatherInfo();
         repository.getForecastsInfo();
+        SyncUtils.startSync(getContext());
 
     }
 

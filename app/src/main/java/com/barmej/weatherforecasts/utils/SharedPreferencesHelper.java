@@ -17,6 +17,23 @@ public final class SharedPreferencesHelper {
     private static final String PREF_SUNRISE_HOUR = "PREF_SUNRISE_HOUR";
     private static final String PREF_SUNSET_HOUR = "PREF_SUNSET_HOUR";
 
+    private static final String PREF_LAST_NOTIFICATION_APPEARANCE = "PREF_LAST_NOTIFICATION_APPEARANCE";
+
+
+    public static void saveLastNotificationTime(Context context, long timeOfNotification){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        sp.edit().putLong(PREF_LAST_NOTIFICATION_APPEARANCE, timeOfNotification).apply();
+    }
+
+    public static long getElapsedTimeSinceLastNotification(Context context){
+        long lastNotificationTimeMillis = SharedPreferencesHelper.getLastNotificationTimeInMillis(context);
+        return System.currentTimeMillis() - lastNotificationTimeMillis;
+    }
+
+    public static long getLastNotificationTimeInMillis(Context context){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getLong(PREF_LAST_NOTIFICATION_APPEARANCE , 0);
+    }
 
     /**
      * Helper method to handle setting sunrise hour in Preferences

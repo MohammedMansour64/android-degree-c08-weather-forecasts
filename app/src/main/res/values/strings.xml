@@ -27,6 +27,21 @@
       - Used by WeatherUtils           -
       - - - - - - - - - - - - - - - - -->
 
+    <!-- Notification channel name for weather status updates channel -->
+    <string name="weather_notification_channel_name" translatable="false">Weather Status</string>
+
+    <!-- Notification channel description for weather status updates channel -->
+    <string name="weather_notification_channel_description" translatable="false">
+        This channel used for displaying notifications after weather update once a day
+    </string>
+
+    <!-- The format of the notification we show when the weather is updated -->
+    <string name="format_notification" translatable="false">
+        Weather Condition: <xliff:g id="condition">%1$s</xliff:g>
+        High:<xliff:g id="high">%2$1.0f</xliff:g>
+        Low:<xliff:g id="low">%3$1.0f</xliff:g>
+    </string>
+
     <!-- HighLow Temperature format -->
     <string name="high_low_temperature">
         <xliff:g id="high_temp">%1$1.0f</xliff:g>\u00B0 /
