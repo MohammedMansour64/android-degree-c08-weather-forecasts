@@ -21,5 +21,11 @@
         going larger will cause lots of problems in the user interface -->
     <dimen name="forecast_item_text_size">28dp</dimen>
 
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">0dp</dimen>
+
 
 </resources>

@@ -23,7 +23,12 @@ public class SyncUtils {
 
     public static void startSync(Context context) {
         Intent intent = new Intent(context , SyncIntentService.class);
-        context.startService(intent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            context.startForegroundService(intent);
+        }else{
+            context.startService(intent);
+        }
+
     }
 
     public static void scheduleSync(Context context){

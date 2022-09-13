@@ -23,6 +23,8 @@ public class NotificationUtils  {
     private static final String WEATHER_STATUS_CHANNEL_ID = "Weather Status";
     private static final int WEATHER_NOTIFICATION_ID = 1;
 
+    public static final int SYNC_SERVICE_NOTIFICATION_ID = 2;
+
     public static void createWeatherStatusNotificationChannel(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             CharSequence name = context.getString(R.string.weather_notification_channel_name);
@@ -69,5 +71,17 @@ public class NotificationUtils  {
             notificationManager.notify(WEATHER_NOTIFICATION_ID , notification);
 
             SharedPreferencesHelper.saveLastNotificationTime(context, System.currentTimeMillis());
+    }
+
+    public static Notification getSyncNotification(Context context){
+        String notificationTitle = context.getString(R.string.app_name);
+        String notificationText = context.getString(R.string.sync_service_notification_message);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context , WEATHER_STATUS_CHANNEL_ID)
+                .setOngoing(true)
+                .setContentTitle(notificationTitle)
+                .setContentText(notificationText)
+                .setSmallIcon(R.drawable.ic_launcher_background);
+
+        return notificationBuilder.build();
     }
 }

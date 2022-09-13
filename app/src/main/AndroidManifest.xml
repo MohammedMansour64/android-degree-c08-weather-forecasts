@@ -5,8 +5,8 @@
 
     <!-- This permission is necessary to access the internet . -->
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -17,13 +17,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <receiver
+            android:name=".WeatherWidgetProvider"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/weather_w_idget_provider_info" />
+        </receiver>
+
         <activity
             android:name=".ui.activities.MainActivity"
+            android:exported="true"
             android:launchMode="singleTop"
-            android:theme="@style/MainActivityTheme"
-            android:exported="true">
+            android:theme="@style/MainActivityTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -35,7 +48,6 @@
             android:name=".data.sync.SyncIntentService"
             android:enabled="true"
             android:exported="false" />
-
         <service
             android:name=".data.sync.SyncJobService"
             android:exported="true"

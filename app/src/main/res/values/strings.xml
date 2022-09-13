@@ -133,5 +133,9 @@
 
     <!-- Value in SharedPreferences for imperial temperature unit option -->
     <string name="pref_units_imperial" translatable="false">imperial</string>
+    <string name="sync_service_notification_message">Weather data syncing...</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 
 </resources>
