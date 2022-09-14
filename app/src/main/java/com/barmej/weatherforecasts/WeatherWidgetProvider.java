@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.widget.RemoteViews;
 
 import androidx.annotation.RequiresApi;
@@ -15,6 +16,11 @@ import androidx.lifecycle.Observer;
 import com.barmej.weatherforecasts.data.WeatherDataRepository;
 import com.barmej.weatherforecasts.data.entity.WeatherInfo;
 import com.barmej.weatherforecasts.ui.activities.MainActivity;
+import com.barmej.weatherforecasts.utils.WeatherUtils;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Implementation of App Widget functionality.
@@ -30,8 +36,18 @@ public class WeatherWidgetProvider extends AppWidgetProvider {
 
         CharSequence widgetText = context.getString(R.string.appwidget_text);
         // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_widget_small);
-        views.setTextViewText(R.id.appwidget_text, widgetText);
+
+        Bundle options = appWidgetManager.getAppWidgetOptions(appWidgetId);
+        int widgetWidth = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH);
+
+        RemoteViews views;
+        if (widgetWidth > 120 && widgetWidth < 180){
+            views = new RemoteViews(context.getPackageName() , R.layout.weather_widget_medium);
+        }else if (widgetWidth > 180){
+            views = new RemoteViews(context.getPackageName() , R.layout.weather_widget_large);
+        }else{
+            views = new RemoteViews(context.getPackageName() , R.layout.weather_widget_small);
+        }
 
         // Instruct the widget manager to update the widget
         WeatherDataRepository repository = WeatherDataRepository.getInstance(context);
@@ -40,14 +56,33 @@ public class WeatherWidgetProvider extends AppWidgetProvider {
             @Override
             public void onChanged(WeatherInfo weatherInfo) {
                 String temperature = context.getString(R.string.format_temperature , weatherInfo.getMain().getTemp());
-                views.setTextViewText(R.id.appwidget_text, temperature);
+                views.setTextViewText(R.id.appwidget_temp, temperature);
+
+                int weatherImageId = WeatherUtils.getWeatherIcon(weatherInfo.getWeather().get(0).getIcon());
+                views.setImageViewResource(R.id.appwidget_image_weather_icon, weatherImageId);
+
+//                String weatherDate = String.valueOf(weatherInfo.getDt());
+//                DateFormat date = new SimpleDateFormat("dd MMM yyyy");
+//                Date res = new Date(weatherDate);
+//                views.setTextViewText(R.id.appwidget_date, date.format(res));
+
+                String weatherLocation = weatherInfo.getName();
+                views.setTextViewText(R.id.appwidget_location, weatherLocation);
+
                 appWidgetManager.updateAppWidget(appWidgetId, views);
             }
         });
 
         Intent intent = new Intent(context, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent , 0);
-        views.setOnClickPendingIntent(R.id.appwidget_text , pendingIntent);
+        views.setOnClickPendingIntent(R.id.appwidget_container , pendingIntent);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void onAppWidgetOptionsChanged(Context context, AppWidgetManager appWidgetManager, int appWidgetId, Bundle newOptions) {
+        updateAppWidget(context, appWidgetManager, appWidgetId);
+        super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

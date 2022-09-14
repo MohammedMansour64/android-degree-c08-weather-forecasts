@@ -1,20 +1,27 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Widget.WeatherForecasts.AppWidget.Container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AppTheme.AppWidgetContainer"
     android:background="@drawable/shape_transparent_rounded_background"
+    android:orientation="horizontal"
+    android:gravity="center"
     android:id="@+id/appwidget_container">
 
     <TextView
         android:id="@+id/appwidget_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:layout_margin="8dp"
         android:textSize="24sp"
         tools:text="12"
+        android:textColor="#fff"
         android:textStyle="bold|italic" />
-</RelativeLayout>
+
+    <ImageView
+        android:id="@+id/appwidget_image_weather_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_broken_clouds"/>
+</LinearLayout>
